@@ -7,6 +7,7 @@ document.querySelector(".equals").addEventListener("click",equalClick);
 let now=[""];
 let i=0;
 let val=[];
+let lastNow=[];
 
 numbers.forEach(
     function (number){
@@ -87,8 +88,7 @@ function equalClick(){
         now[x]=now[x].toString();
         if(now[x].indexOf("%")>-1){
             if(now[x-1]==="/" || now[x-1]==="*" || now[x+1]==="/" || now[x+1]==="*" ||now[x-1]===undefined){
-                now[x]=now[x].slice(0,-1);
-                now[x]=now[x]/100;
+                now[x]=now[x].slice(0,-1)/100;
             }
             console.log(now)
         }
@@ -136,16 +136,28 @@ function equalClick(){
 
     while(now.includes("+")){
         for(let x=0;x<now.length;x++){
-            if(now[x+1]==="+"){
+            if(now[x+1]==="+" && now[x].toString().indexOf("%")===-1 && now[x+2].toString().indexOf("%")===-1){
                 val.push(parseFloat(now[x])+parseFloat(now[x+2]));
                 x+=2;
             }else{
                 val.push(now[x]);
             }
         }
-        console.log(val)
         now=val;
+        if(JSON.stringify(lastNow)===JSON.stringify(now)){
+            console.log("mulai penjumlahan persen")
+            for(let x=0; x<now.length; x++){
+                if(now[x].toString().includes("%")){
+                    now[x]=now[x].slice(0,-1);
+                    now[x]=now[x-2]*now[x]/100;
+                }
+            }
+            console.log(now);
+        }
+        lastNow=val;
         val=[];
+        console.log(now);
+        
     }
     calcScreen.value=now;
     i=0;
