@@ -95,7 +95,7 @@ function equalClick(){
     }
 
     //menggunakan eval untuk menemukan result dengan mudah
-    console.log(eval(now.join("")));
+    //console.log(eval(now.join("")));
 
     //merubah a-b menjadi a+(-b)
     for(let x=0; x<now.length;x++){
