@@ -87,7 +87,7 @@ function equalClick(){
     for(let x=0; x<now.length; x++){
         now[x]=now[x].toString();
         if(now[x].indexOf("%")>-1){
-            if(now[x-1]==="/" || now[x-1]==="*" || now[x+1]==="/" || now[x+1]==="*" ||now[x-1]===undefined){
+            if(now[x-1]==="/" || now[x-1]==="x" || now[x+1]==="/" || now[x+1]==="x" ||now[x-1]===undefined){
                 now[x]=now[x].slice(0,-1)/100;
             }
             console.log(now)
@@ -107,9 +107,9 @@ function equalClick(){
     console.log(now)
     
     //menggunakan cara manual untuk menemukan result
-    while(now.includes("*")){
+    while(now.includes("x")){
         for(let x=0;x<now.length;x++){
-            if(now[x+1]==="*"){
+            if(now[x+1]==="x"){
                 val.push(parseFloat(now[x])*parseFloat(now[x+2]));
                 x+=2;
             }else{
